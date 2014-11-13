@@ -12,11 +12,16 @@ class Item
   property :done, Boolean, :required => true, :default => false
   property :created, DateTime
 end
+
 DataMapper.finalize.auto_upgrade!
 
 get '/?' do
   @items = Item.all(:order => :created.desc)
   redirect '/new' if @items.empty?
+  erb :index
+end
+
+post '/test' do
   erb :index
 end
 
@@ -28,15 +33,6 @@ end
 post '/new/?' do
   Item.create(:content => params[:content], :created => Time.now)
   redirect '/'
-end
-
-post '/done/?' do
-  item = Item.first(:id => params[:id])
-  item.done = !item.done
-  item.save
-  content_type 'application/json'
-  value = item.done ? 'done' : 'not done'
-  { :id => params[:id], :status => value }.to_json
 end
 
 get '/delete/:id/?' do

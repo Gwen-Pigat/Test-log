@@ -1,12 +1,15 @@
+<form action="/test" method="post" accept-charset="utf-8">
 <ul id="todo-list" class="unstyled">
-    <% @items.each do |item| %>
+    <% @items.each do |item| %> 
       <li id="<%= item[:id] %>">
+      	<p>Ce log a été écrit par <strong><%= params[:prenom] %></strong></p>
         <span class="item"><%= item[:done] ? "<del>#{item[:content]}</del>" : item[:content] %></span>
         <span class="pull-right">
-          <a href="#" class="btn done"><%= item[:done] ? "Non valider" : "Valider" %></a>
+          <a href="#" class="btn modifier"><%= item[:done] ? "Non valider" : "Modifier" %></a>
           <a href="/delete/<%= item[:id] %>" class="btn btn-danger">Supprimer</a>
         </span>
       </li>
     <% end %>
 </ul>
+</form>
 <a href="/new" class="btn btn-primary">Ajouter un nouveau log</a>
