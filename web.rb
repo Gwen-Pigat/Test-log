@@ -21,10 +21,6 @@ get '/?' do
   erb :index
 end
 
-post '/test' do
-  erb :index
-end
-
 get '/new/?' do
   @title = "Votre log :"
   erb :new
@@ -33,6 +29,15 @@ end
 post '/new/?' do
   Item.create(:content => params[:content], :created => Time.now)
   redirect '/'
+end
+
+post '/new/?' do
+  Item.create(:prenom => params[:prenom])
+  redirect '/'
+end
+
+get '/modify' do
+  erb :modify
 end
 
 get '/delete/:id/?' do

@@ -2,10 +2,10 @@
 <ul id="todo-list" class="unstyled">
     <% @items.each do |item| %> 
       <li id="<%= item[:id] %>">
-      	<p>Ce log a été écrit par <strong><%= params[:prenom] %></strong></p>
+      	<p>Ce log a été écrit par <strong><%= item[:prenom] %></strong></p>
         <span class="item"><%= item[:done] ? "<del>#{item[:content]}</del>" : item[:content] %></span>
         <span class="pull-right">
-          <a href="#" class="btn modifier"><%= item[:done] ? "Non valider" : "Modifier" %></a>
+          <a href="/modify" class="btn modifier"><%= item[:done] ? "Non valider" : "Modifier" %></a>
           <a href="/delete/<%= item[:id] %>" class="btn btn-danger">Supprimer</a>
         </span>
       </li>
